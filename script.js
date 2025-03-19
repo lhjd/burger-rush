@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const ingredientButtons = document.querySelectorAll('.ingredient-btn');
   const message1Element = document.getElementById('message1');
   const message2Element = document.getElementById('message2');
-  const player1ScoreElement = document.getElementById('player1-score');
-  const player2ScoreElement = document.getElementById('player2-score');
+  const player1Circles = document.querySelectorAll('.player1-circles .circle');
+  const player2Circles = document.querySelectorAll('.player2-circles .circle');
   const newGameButton = document.getElementById('new-game-btn');
+  const player1Area = document.querySelector('.player1-area');
+  const player2Area = document.querySelector('.player2-area');
 
   // Game state
   let gameActive = false;
@@ -96,17 +98,33 @@ document.addEventListener('DOMContentLoaded', () => {
     burgerStack1Element.innerHTML = '';
     burgerStack2Element.innerHTML = '';
 
-    // Clear the messages
-    message1Element.textContent = '';
-    message1Element.className = 'message';
-    message2Element.textContent = '';
-    message2Element.className = 'message';
+    // Reset visual feedback
+    resetVisualFeedback();
+
+    // Reset the score circles
+    resetScoreCircles();
 
     // Generate a new random order
     generateNewOrder();
+  }
 
-    // Update the score display
-    updateScoreDisplay();
+  // Function to reset score circles
+  function resetScoreCircles() {
+    // Reset player 1 circles
+    player1Circles.forEach(circle => {
+      circle.classList.remove('filled');
+    });
+
+    // Reset player 2 circles
+    player2Circles.forEach(circle => {
+      circle.classList.remove('filled');
+    });
+  }
+
+  // Function to reset visual feedback
+  function resetVisualFeedback() {
+    player1Area.classList.remove('error', 'success', 'winner');
+    player2Area.classList.remove('error', 'success', 'winner');
   }
 
   // Function to start a new round
@@ -121,11 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
     burgerStack1Element.innerHTML = '';
     burgerStack2Element.innerHTML = '';
 
-    // Clear the messages
-    message1Element.textContent = '';
-    message1Element.className = 'message';
-    message2Element.textContent = '';
-    message2Element.className = 'message';
+    // Reset visual feedback
+    resetVisualFeedback();
 
     // Generate a new random order
     generateNewOrder();
@@ -193,7 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playerBurger = player === 1 ? player1Burger : player2Burger;
     const burgerStackElement = player === 1 ? burgerStack1Element : burgerStack2Element;
-    const messageElement = player === 1 ? message1Element : message2Element;
+    const playerArea = player === 1 ? player1Area : player2Area;
+    const opponentArea = player === 1 ? player2Area : player1Area;
     const currentIndex = playerBurger.length;
 
     // Check if this ingredient is correct according to the order
@@ -214,17 +230,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Mark as failed and the other player wins
       gameActive = false;
-      messageElement.textContent = "❌ Wrong ingredient!";
-      messageElement.className = "message error";
+
+      // Apply visual feedback
+      playerArea.classList.add('error');
+      opponentArea.classList.add('winner');
 
       if (player === 1) {
         player2Score++;
-        message2Element.textContent = `🏆 Round win! (${player2Score}/${BURGERS_TO_WIN})`;
-        message2Element.className = "message winner";
+        updateScoreCircles(2);
       } else {
         player1Score++;
-        message1Element.textContent = `🏆 Round win! (${player1Score}/${BURGERS_TO_WIN})`;
-        message1Element.className = "message winner";
+        updateScoreCircles(1);
       }
 
       // Check if someone has won the game
@@ -237,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(startNewRound, 2000);
       }
 
-      updateScoreDisplay();
       return;
     }
 
@@ -262,16 +277,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (player === 1) {
         player1Score++;
-        message1Element.textContent = `✅ Perfect burger! (${player1Score}/${BURGERS_TO_WIN})`;
-        message1Element.className = "message success";
-        message2Element.textContent = "😢 Too slow!";
-        message2Element.className = "message error";
+        // Apply visual feedback
+        player1Area.classList.add('success');
+        player2Area.classList.add('error');
+        updateScoreCircles(1);
       } else {
         player2Score++;
-        message2Element.textContent = `✅ Perfect burger! (${player2Score}/${BURGERS_TO_WIN})`;
-        message2Element.className = "message success";
-        message1Element.textContent = "😢 Too slow!";
-        message1Element.className = "message error";
+        // Apply visual feedback
+        player2Area.classList.add('success');
+        player1Area.classList.add('error');
+        updateScoreCircles(2);
       }
 
       // Check if someone has won the game
@@ -283,32 +298,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Continue to next round after a delay
         setTimeout(startNewRound, 2000);
       }
+    }
+  }
 
-      updateScoreDisplay();
+  // Function to update score circles
+  function updateScoreCircles(player) {
+    const circles = player === 1 ? player1Circles : player2Circles;
+    const score = player === 1 ? player1Score : player2Score;
+
+    // Fill in circles up to the current score
+    for (let i = 0; i < circles.length; i++) {
+      if (i < score) {
+        circles[i].classList.add('filled');
+      } else {
+        circles[i].classList.remove('filled');
+      }
     }
   }
 
   // Function to declare the final winner
   function declareWinner(player) {
+    // Reset visual feedback first
+    resetVisualFeedback();
+
     if (player === 1) {
-      message1Element.textContent = "🏆 YOU WIN THE GAME! 🏆";
-      message1Element.className = "message winner";
-      message2Element.textContent = "Game Over";
-      message2Element.className = "message error";
+      player1Area.classList.add('winner');
+      player2Area.classList.add('error');
     } else {
-      message2Element.textContent = "🏆 YOU WIN THE GAME! 🏆";
-      message2Element.className = "message winner";
-      message1Element.textContent = "Game Over";
-      message1Element.className = "message error";
+      player2Area.classList.add('winner');
+      player1Area.classList.add('error');
     }
 
     // Add game over class to container for potential styling
     document.querySelector('.container').classList.add('game-over');
-  }
-
-  // Function to update the score display
-  function updateScoreDisplay() {
-    player1ScoreElement.textContent = `Player 1: ${player1Score}/${BURGERS_TO_WIN} burgers`;
-    player2ScoreElement.textContent = `Player 2: ${player2Score}/${BURGERS_TO_WIN} burgers`;
   }
 }); 

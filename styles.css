@@ -16,6 +16,7 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    position: relative;
 }
 
 h1 {
@@ -31,10 +32,65 @@ h2 {
 .score-display {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    align-items: center;
+    gap: 30px;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+}
+
+.score-circles {
+    display: flex;
+    gap: 10px;
+}
+
+.circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #e65100;
+    transition: background-color 0.3s;
+}
+
+.circle.filled {
+    background-color: #e65100;
+}
+
+.vs {
+    font-size: 1.2rem;
     font-weight: bold;
+    color: #777;
+}
+
+.player1-circles .circle {
+    border-color: #3498db;
+}
+
+.player1-circles .circle.filled {
+    background-color: #3498db;
+}
+
+.player2-circles .circle {
+    border-color: #e74c3c;
+}
+
+.player2-circles .circle.filled {
+    background-color: #e74c3c;
+}
+
+.player-label {
+    font-size: 1rem;
+    color: #777;
+    text-transform: uppercase;
+}
+
+.score {
+    color: #e65100;
+    font-size: 2.5rem;
+    min-width: 1.5ch;
+    text-align: center;
+}
+
+.score-divider {
+    color: #aaa;
 }
 
 .game-container {
@@ -49,6 +105,7 @@ h2 {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex: 1;
+    transition: all 0.3s ease;
 }
 
 .player1-area {
@@ -78,7 +135,7 @@ h2 {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    height: 200px;
+    height: 180px;
     padding: 10px;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -205,9 +262,11 @@ h2 {
 
 #new-game-btn {
     background-color: #4CAF50;
-    margin-top: 20px;
     padding: 12px 24px;
     font-size: 18px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 #new-game-btn:hover {
@@ -215,35 +274,55 @@ h2 {
 }
 
 .message {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
 }
 
-.success {
-    background-color: #dff0d8;
-    color: #3c763d;
+.game-area.error {
+    box-shadow: 0 0 0 3px #f2dede;
+    background-color: rgba(242, 222, 222, 0.2);
 }
 
-.error {
-    background-color: #f2dede;
-    color: #a94442;
+.game-area.success {
+    box-shadow: 0 0 0 3px #dff0d8;
+    background-color: rgba(223, 240, 216, 0.2);
 }
 
-.winner {
-    background-color: #fcf8e3;
-    color: #8a6d3b;
+.game-area.winner {
+    box-shadow: 0 0 0 3px #dff0d8;
+    background-color: rgba(223, 240, 216, 0.3);
 }
 
 .controls-info {
     margin-top: 10px;
-    color: #777;
-    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.key-box {
+    width: 40px;
+    height: 40px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.bread-key {
+    border-color: #f5deb3;
+    color: #f5deb3;
+}
+
+.meat-key {
+    border-color: #8b4513;
+    color: #8b4513;
+}
+
+.lettuce-key {
+    border-color: #90ee90;
+    color: #90ee90;
 }
 
 .game-controls {

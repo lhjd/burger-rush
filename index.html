@@ -10,16 +10,25 @@
 
 <body>
   <div class="container">
+    <button id="new-game-btn" class="new-game-btn">New Game</button>
     <h1>Burger Rush</h1>
     <div id="score-display" class="score-display">
-      <div id="player1-score">Player 1: 0</div>
-      <div id="player2-score">Player 2: 0</div>
+      <div class="score-circles player1-circles">
+        <div class="circle" data-player="1" data-index="0"></div>
+        <div class="circle" data-player="1" data-index="1"></div>
+        <div class="circle" data-player="1" data-index="2"></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="score-circles player2-circles">
+        <div class="circle" data-player="2" data-index="0"></div>
+        <div class="circle" data-player="2" data-index="1"></div>
+        <div class="circle" data-player="2" data-index="2"></div>
+      </div>
     </div>
 
     <div class="game-container">
       <!-- Player 1 Game Area -->
       <div class="game-area player1-area">
-        <h2>Player 1</h2>
         <div class="order-area">
           <div id="order1" class="order"></div>
         </div>
@@ -38,13 +47,14 @@
 
         <div id="message1" class="message"></div>
         <div class="controls-info">
-          A: Bread | S: Meat | D: Lettuce
+          <div class="key-box bread-key">A</div>
+          <div class="key-box meat-key">S</div>
+          <div class="key-box lettuce-key">D</div>
         </div>
       </div>
 
       <!-- Player 2 Game Area -->
       <div class="game-area player2-area">
-        <h2>Player 2</h2>
         <div class="order-area">
           <div id="order2" class="order"></div>
         </div>
@@ -63,12 +73,12 @@
 
         <div id="message2" class="message"></div>
         <div class="controls-info">
-          J: Bread | K: Meat | L: Lettuce
+          <div class="key-box bread-key">J</div>
+          <div class="key-box meat-key">K</div>
+          <div class="key-box lettuce-key">L</div>
         </div>
       </div>
     </div>
-
-    <button id="new-game-btn" class="new-game-btn">New Game</button>
   </div>
 
   <script src="script.js"></script>
