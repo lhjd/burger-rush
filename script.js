@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedback1Element = document.getElementById('feedback1');
   const feedback2Element = document.getElementById('feedback2');
   const ingredientButtons = document.querySelectorAll('.ingredient-btn');
-  const message1Element = document.getElementById('message1');
-  const message2Element = document.getElementById('message2');
   const player1Circles = document.querySelectorAll('.player1-circles .circle');
   const player2Circles = document.querySelectorAll('.player2-circles .circle');
   const newGameButton = document.getElementById('new-game-btn');
@@ -26,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let countdownActive = false;
   // Add burger counters and win condition
   const BURGERS_TO_WIN = 3;
-
-  // Ingredients available
-  const ingredients = ['bread', 'meat', 'lettuce'];
 
   // Initialize the game
   startNewGame();
@@ -275,9 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerBurger = player === 1 ? player1Burger : player2Burger;
     const burgerStackElement = player === 1 ? burgerStack1Element : burgerStack2Element;
     const playerFeedback = player === 1 ? feedback1Element : feedback2Element;
-    const opponentFeedback = player === 1 ? feedback2Element : feedback1Element;
     const playerArea = player === 1 ? player1Area : player2Area;
-    const opponentArea = player === 1 ? player2Area : player1Area;
     const currentIndex = playerBurger.length;
 
     // Check if this ingredient is correct according to the order
@@ -387,6 +380,9 @@ document.addEventListener('DOMContentLoaded', () => {
     resetVisualFeedback();
 
     const winnerArea = player === 1 ? player1Area : player2Area;
+
+    // Add winner class to the winner's area
+    winnerArea.classList.add('winner');
 
     // Create a single burst of abundant confetti for the game winner
     createConfetti(winnerArea);

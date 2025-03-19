@@ -76,11 +76,6 @@ h2 {
     background-color: #e74c3c;
 }
 
-.player-label {
-    font-size: 1rem;
-    color: #777;
-    text-transform: uppercase;
-}
 
 .score {
     color: #e65100;
@@ -89,9 +84,6 @@ h2 {
     text-align: center;
 }
 
-.score-divider {
-    color: #aaa;
-}
 
 .game-container {
     display: flex;
@@ -181,16 +173,6 @@ h2 {
     height: 10px;
 }
 
-.cheese {
-    background-color: #ffd700;
-    height: 10px;
-}
-
-.tomato {
-    background-color: #ff6347;
-    height: 15px;
-}
-
 .buttons {
     display: flex;
     justify-content: center;
@@ -198,7 +180,7 @@ h2 {
     gap: 10px;
 }
 
-.ingredient-btn, #reset-btn, #new-order-btn, #new-game-btn, #start-btn {
+.ingredient-btn, #new-game-btn, #start-btn {
     padding: 10px 15px;
     color: white;
     border: none;
@@ -234,39 +216,6 @@ h2 {
 
 .lettuce-btn:hover {
     background-color: #7ad67a;
-}
-
-.cheese-btn {
-    background-color: #ffd700;
-    color: #333;
-}
-
-.cheese-btn:hover {
-    background-color: #e5c100;
-}
-
-.tomato-btn {
-    background-color: #ff6347;
-}
-
-.tomato-btn:hover {
-    background-color: #e55a40;
-}
-
-#reset-btn {
-    background-color: #f44336;
-}
-
-#reset-btn:hover {
-    background-color: #d32f2f;
-}
-
-#new-order-btn {
-    background-color: #2196f3;
-}
-
-#new-order-btn:hover {
-    background-color: #1976d2;
 }
 
 #new-game-btn {
@@ -313,10 +262,6 @@ h2 {
     color: white;
     font-size: 80px;
     font-weight: bold;
-}
-
-.message {
-    display: none;
 }
 
 .game-area.error {
