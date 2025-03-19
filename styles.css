@@ -149,6 +149,7 @@ h2 {
     border-radius: 5px;
     background-color: transparent;
     justify-content: flex-start;
+    position: relative;
 }
 
 .ingredient {
@@ -386,4 +387,40 @@ h2 {
         transform: translateY(500px) translateX(var(--drift, 0)) rotate(720deg);
         opacity: 0;
     }
+}
+
+/* Feedback overlay styles */
+.feedback-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 10;
+}
+
+.feedback-overlay.visible {
+    opacity: 1;
+}
+
+.feedback-overlay .tick,
+.feedback-overlay .cross {
+    display: none;
+}
+
+.feedback-overlay.success .tick {
+    display: block;
+    color: #4CAF50;
+}
+
+.feedback-overlay.error .cross {
+    display: block;
+    color: #e74c3c;
 } 

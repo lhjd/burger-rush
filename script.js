@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const order2Element = document.getElementById('order2');
   const burgerStack1Element = document.getElementById('burger-stack1');
   const burgerStack2Element = document.getElementById('burger-stack2');
+  const feedback1Element = document.getElementById('feedback1');
+  const feedback2Element = document.getElementById('feedback2');
   const ingredientButtons = document.querySelectorAll('.ingredient-btn');
   const message1Element = document.getElementById('message1');
   const message2Element = document.getElementById('message2');
@@ -140,9 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Remove game over class if present
     document.querySelector('.container').classList.remove('game-over');
 
-    // Clear the burger stacks
-    burgerStack1Element.innerHTML = '';
-    burgerStack2Element.innerHTML = '';
+    // Clear the burger stacks but preserve the feedback overlays
+    clearBurgerStack(burgerStack1Element);
+    clearBurgerStack(burgerStack2Element);
 
     // Reset visual feedback
     resetVisualFeedback();
@@ -178,6 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetVisualFeedback() {
     player1Area.classList.remove('error', 'success', 'winner');
     player2Area.classList.remove('error', 'success', 'winner');
+
+    // Hide feedback overlays
+    feedback1Element.classList.remove('visible', 'success', 'error');
+    feedback2Element.classList.remove('visible', 'success', 'error');
   }
 
   // Function to start a new round
@@ -188,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
     player1Burger = [];
     player2Burger = [];
 
-    // Clear the burger stacks
-    burgerStack1Element.innerHTML = '';
-    burgerStack2Element.innerHTML = '';
+    // Clear the burger stacks but preserve the feedback overlays
+    clearBurgerStack(burgerStack1Element);
+    clearBurgerStack(burgerStack2Element);
 
     // Reset visual feedback
     resetVisualFeedback();
@@ -268,6 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playerBurger = player === 1 ? player1Burger : player2Burger;
     const burgerStackElement = player === 1 ? burgerStack1Element : burgerStack2Element;
+    const playerFeedback = player === 1 ? feedback1Element : feedback2Element;
+    const opponentFeedback = player === 1 ? feedback2Element : feedback1Element;
     const playerArea = player === 1 ? player1Area : player2Area;
     const opponentArea = player === 1 ? player2Area : player1Area;
     const currentIndex = playerBurger.length;
@@ -291,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mark as failed and the other player wins
       gameActive = false;
 
-      // Apply visual feedback - only highlight the winner
-      opponentArea.classList.add('winner');
+      // Show red cross on the player's burger who made the mistake
+      playerFeedback.classList.add('visible', 'error');
 
       if (player === 1) {
         player2Score++;
@@ -336,13 +344,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (player === 1) {
         player1Score++;
-        // Apply visual feedback - only highlight the winner
-        player1Area.classList.add('success');
+        // Show green tick on the successful burger
+        feedback1Element.classList.add('visible', 'success');
         updateScoreCircles(1);
       } else {
         player2Score++;
-        // Apply visual feedback - only highlight the winner
-        player2Area.classList.add('success');
+        // Show green tick on the successful burger
+        feedback2Element.classList.add('visible', 'success');
         updateScoreCircles(2);
       }
 
@@ -380,13 +388,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const winnerArea = player === 1 ? player1Area : player2Area;
 
-    // Only highlight the winner
-    winnerArea.classList.add('winner');
-
     // Create a single burst of abundant confetti for the game winner
     createConfetti(winnerArea);
 
     // Add game over class to container for potential styling
     document.querySelector('.container').classList.add('game-over');
+  }
+
+  // Function to clear burger stack but preserve feedback overlay
+  function clearBurgerStack(stackElement) {
+    // Save the feedback overlay
+    const feedbackOverlay = stackElement.querySelector('.feedback-overlay');
+
+    // Clear the stack
+    stackElement.innerHTML = '';
+
+    // Re-append the feedback overlay
+    if (feedbackOverlay) {
+      stackElement.appendChild(feedbackOverlay);
+    }
   }
 }); 
