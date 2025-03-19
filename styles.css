@@ -294,6 +294,10 @@ h2 {
     background-color: #c0392b;
 }
 
+#start-btn.hidden {
+    display: none;
+}
+
 .countdown {
     position: fixed;
     top: 0;

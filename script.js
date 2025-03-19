@@ -91,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     countdownActive = true;
     gameActive = false;
 
+    // Hide the START button after it's clicked
+    startButton.classList.add('hidden');
+
     // Create countdown overlay
     const countdownElement = document.createElement('div');
     countdownElement.className = 'countdown';
@@ -151,6 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
     order1Element.classList.remove('visible');
     order2Element.classList.remove('visible');
 
+    // Show the START button
+    startButton.classList.remove('hidden');
+
     // Generate a new random order
     generateNewOrder();
   }
@@ -189,12 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset visual feedback
     resetVisualFeedback();
 
-    // Hide orders until countdown starts
-    order1Element.classList.remove('visible');
-    order2Element.classList.remove('visible');
-
     // Generate a new random order
     generateNewOrder();
+
+    // Make orders visible immediately (since countdown has been done for the game)
+    order1Element.classList.add('visible');
+    order2Element.classList.add('visible');
+
+    // Enable ingredient inputs immediately (don't require Start button between rounds)
+    gameActive = true;
   }
 
   // Function to generate a new random order
