@@ -383,10 +383,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only highlight the winner
     winnerArea.classList.add('winner');
 
-    // Create confetti for the game winner!
+    // Create a single burst of abundant confetti for the game winner
     createConfetti(winnerArea);
-    setTimeout(() => createConfetti(winnerArea), 500);
-    setTimeout(() => createConfetti(winnerArea), 1000);
 
     // Add game over class to container for potential styling
     document.querySelector('.container').classList.add('game-over');
