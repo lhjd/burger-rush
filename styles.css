@@ -159,6 +159,7 @@ h2 {
     background-color: #f5deb3;
     height: 40px;
     border-radius: 90px 90px 5px 5px;
+    width: 180px;
 }
 
 .bread.bottom {
@@ -168,12 +169,15 @@ h2 {
 
 .meat {
     background-color: #8b4513;
-    height: 20px;
+    height: 15px;
+    width: 180px;
 }
 
 .lettuce {
     background-color: #90ee90;
-    height: 10px;
+    height: 5px;
+    width: 220px;
+    padding: 0;
 }
 
 .buttons {
