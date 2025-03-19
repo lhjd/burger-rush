@@ -269,7 +269,7 @@ h2 {
 }
 
 #new-game-btn {
-    background-color: #4CAF50;
+    background-color: #e74c3c;
     padding: 12px 24px;
     font-size: 18px;
     position: absolute;
@@ -278,11 +278,11 @@ h2 {
 }
 
 #new-game-btn:hover {
-    background-color: #388E3C;
+    background-color: #c0392b;
 }
 
 #start-btn {
-    background-color: #e74c3c;
+    background-color: #4CAF50;
     padding: 12px 24px;
     font-size: 18px;
     position: absolute;
@@ -291,7 +291,7 @@ h2 {
 }
 
 #start-btn:hover {
-    background-color: #c0392b;
+    background-color: #388E3C;
 }
 
 #start-btn.hidden {
