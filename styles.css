@@ -131,6 +131,12 @@ h2 {
     border: 2px dashed #ccc;
     border-radius: 5px;
     justify-content: flex-start;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.order.visible {
+    opacity: 1;
 }
 
 .burger-stack {
@@ -191,7 +197,7 @@ h2 {
     gap: 10px;
 }
 
-.ingredient-btn, #reset-btn, #new-order-btn, #new-game-btn {
+.ingredient-btn, #reset-btn, #new-order-btn, #new-game-btn, #start-btn {
     padding: 10px 15px;
     color: white;
     border: none;
@@ -273,6 +279,35 @@ h2 {
 
 #new-game-btn:hover {
     background-color: #388E3C;
+}
+
+#start-btn {
+    background-color: #e74c3c;
+    padding: 12px 24px;
+    font-size: 18px;
+    position: absolute;
+    top: 20px;
+    right: 180px;
+}
+
+#start-btn:hover {
+    background-color: #c0392b;
+}
+
+.countdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+    font-size: 80px;
+    font-weight: bold;
 }
 
 .message {

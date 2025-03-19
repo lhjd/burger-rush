@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const player1Circles = document.querySelectorAll('.player1-circles .circle');
   const player2Circles = document.querySelectorAll('.player2-circles .circle');
   const newGameButton = document.getElementById('new-game-btn');
+  const startButton = document.getElementById('start-btn');
   const player1Area = document.querySelector('.player1-area');
   const player2Area = document.querySelector('.player2-area');
 
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let player2Burger = [];
   let player1Score = 0;
   let player2Score = 0;
+  let countdownActive = false;
   // Add burger counters and win condition
   const BURGERS_TO_WIN = 3;
 
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event listeners
   newGameButton.addEventListener('click', startNewGame);
+  startButton.addEventListener('click', startCountdown);
 
   // Add event listeners for ingredient buttons
   ingredientButtons.forEach(button => {
@@ -81,10 +84,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Add countdown function
+  function startCountdown() {
+    if (countdownActive) return;
+
+    countdownActive = true;
+    gameActive = false;
+
+    // Create countdown overlay
+    const countdownElement = document.createElement('div');
+    countdownElement.className = 'countdown';
+    document.body.appendChild(countdownElement);
+
+    // Start the countdown sequence
+    countdownElement.textContent = '3';
+
+    setTimeout(() => {
+      countdownElement.textContent = '2';
+
+      setTimeout(() => {
+        countdownElement.textContent = '1';
+
+        setTimeout(() => {
+          countdownElement.textContent = 'GO!';
+
+          setTimeout(() => {
+            // Remove the countdown overlay and activate the game
+            countdownElement.remove();
+            gameActive = true;
+            countdownActive = false;
+
+            // Show the orders only after countdown
+            order1Element.classList.add('visible');
+            order2Element.classList.add('visible');
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }
+
   // Function to start a new game
   function startNewGame() {
     // Reset game state
-    gameActive = true;
+    gameActive = false;
+    countdownActive = false;
     currentOrder = [];
     player1Burger = [];
     player2Burger = [];
@@ -103,6 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset the score circles
     resetScoreCircles();
+
+    // Hide orders until countdown starts
+    order1Element.classList.remove('visible');
+    order2Element.classList.remove('visible');
 
     // Generate a new random order
     generateNewOrder();
@@ -130,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to start a new round
   function startNewRound() {
     // Reset for the next round
-    gameActive = true;
+    gameActive = false;
     currentOrder = [];
     player1Burger = [];
     player2Burger = [];
@@ -141,6 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset visual feedback
     resetVisualFeedback();
+
+    // Hide orders until countdown starts
+    order1Element.classList.remove('visible');
+    order2Element.classList.remove('visible');
 
     // Generate a new random order
     generateNewOrder();
