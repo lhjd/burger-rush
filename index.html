@@ -4,33 +4,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burger Rush</title>
+  <title>Burger Rush - 2 Player</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <div class="container">
     <h1>Burger Rush</h1>
+    <div id="score-display" class="score-display">
+      <div id="player1-score">Player 1: 0</div>
+      <div id="player2-score">Player 2: 0</div>
+    </div>
 
-    <div class="game-area">
-      <div class="order-area">
-        <div id="order" class="order"></div>
-      </div>
+    <div class="game-container">
+      <!-- Player 1 Game Area -->
+      <div class="game-area player1-area">
+        <h2>Player 1</h2>
+        <div class="order-area">
+          <div id="order1" class="order"></div>
+        </div>
 
-      <div class="burger-area">
-        <div id="burger-stack" class="burger-stack"></div>
-      </div>
+        <div class="burger-area">
+          <div id="burger-stack1" class="burger-stack"></div>
+        </div>
 
-      <div class="ingredients">
-        <div class="buttons">
-          <button class="ingredient-btn bread-btn" data-ingredient="bread"></button>
-          <button class="ingredient-btn meat-btn" data-ingredient="meat"></button>
-          <button class="ingredient-btn lettuce-btn" data-ingredient="lettuce"></button>
+        <div class="ingredients">
+          <div class="buttons">
+            <button class="ingredient-btn bread-btn" data-ingredient="bread" data-player="1"></button>
+            <button class="ingredient-btn meat-btn" data-ingredient="meat" data-player="1"></button>
+            <button class="ingredient-btn lettuce-btn" data-ingredient="lettuce" data-player="1"></button>
+          </div>
+        </div>
+
+        <div id="message1" class="message"></div>
+        <div class="controls-info">
+          A: Bread | S: Meat | D: Lettuce
         </div>
       </div>
 
-      <div id="message" class="message"></div>
+      <!-- Player 2 Game Area -->
+      <div class="game-area player2-area">
+        <h2>Player 2</h2>
+        <div class="order-area">
+          <div id="order2" class="order"></div>
+        </div>
+
+        <div class="burger-area">
+          <div id="burger-stack2" class="burger-stack"></div>
+        </div>
+
+        <div class="ingredients">
+          <div class="buttons">
+            <button class="ingredient-btn bread-btn" data-ingredient="bread" data-player="2"></button>
+            <button class="ingredient-btn meat-btn" data-ingredient="meat" data-player="2"></button>
+            <button class="ingredient-btn lettuce-btn" data-ingredient="lettuce" data-player="2"></button>
+          </div>
+        </div>
+
+        <div id="message2" class="message"></div>
+        <div class="controls-info">
+          J: Bread | K: Meat | L: Lettuce
+        </div>
+      </div>
     </div>
+
+    <button id="new-game-btn" class="new-game-btn">New Game</button>
   </div>
 
   <script src="script.js"></script>

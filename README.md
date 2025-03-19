@@ -1,30 +1,45 @@
-# Burger Rush
+# Burger Rush - 2 Player Edition
 
-A simple web-based game where you build burgers according to orders.
+A competitive 2-player web-based game where players race to build burgers according to orders.
 
 ## How to Play
 
 1. Open `index.html` in your web browser.
-2. You'll see an order displayed at the top, showing a stack of ingredients.
-3. Click on ingredient buttons to add them to your burger, starting from the bottom (first ingredient) to the top (last ingredient).
-4. If you add an incorrect ingredient, the game will immediately show a failure message (❌) and generate a new order after 1.5 seconds.
-5. If you complete the burger correctly, the game will show a success message (✅) and automatically generate a new order after 1.5 seconds.
+2. You'll see an identical order displayed for both players, showing a stack of ingredients.
+3. Players compete side by side to build the same burger.
+4. The first player to correctly complete their burger wins the round and earns a point.
+5. If a player adds an incorrect ingredient, they lose immediately and the other player wins the round.
+6. **The first player to successfully build 3 burgers wins the game!**
+7. Click the "New Game" button to start a new game.
 
 ## Game Rules
 
-- You must build the burger in the exact order shown, from bottom to top.
+- Both players must build the same burger in the exact order shown, from bottom to top.
 - Each burger starts with a bottom bread and ends with a top bread.
 - The middle ingredients can be any combination of meat and lettuce.
 - Orders are randomly generated with 3-5 total ingredients (including the bread).
-- The game ensures each new order is different from the previous one.
+- Players race against each other - the fastest player to complete the burger correctly wins the round.
+- Making a mistake results in immediate loss of the round.
+- The first player to win 3 rounds (build 3 correct burgers) wins the entire game.
+- A new round starts automatically after a short delay.
 
 ## Controls
+
+### Player 1 (Left side)
 
 - Click the ingredient buttons to add ingredients to your burger
 - Keyboard shortcuts:
   - `A`: Add bread
   - `S`: Add meat
   - `D`: Add lettuce
+
+### Player 2 (Right side)
+
+- Click the ingredient buttons to add ingredients to your burger
+- Keyboard shortcuts:
+  - `J`: Add bread
+  - `K`: Add meat
+  - `L`: Add lettuce
 
 ## Files
 

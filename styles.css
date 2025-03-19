@@ -12,14 +12,14 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #e65100;
 }
 
@@ -28,15 +28,39 @@ h2 {
     color: #e65100;
 }
 
+.score-display {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
 .game-area {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.player1-area {
+    border-left: 5px solid #3498db;
+}
+
+.player2-area {
+    border-left: 5px solid #e74c3c;
 }
 
 .order-area, .burger-area, .ingredients {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .order {
@@ -108,7 +132,7 @@ h2 {
     gap: 10px;
 }
 
-.ingredient-btn, #reset-btn, #new-order-btn {
+.ingredient-btn, #reset-btn, #new-order-btn, #new-game-btn {
     padding: 10px 15px;
     color: white;
     border: none;
@@ -179,6 +203,17 @@ h2 {
     background-color: #1976d2;
 }
 
+#new-game-btn {
+    background-color: #4CAF50;
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 18px;
+}
+
+#new-game-btn:hover {
+    background-color: #388E3C;
+}
+
 .message {
     margin-top: 20px;
     padding: 10px;
@@ -198,6 +233,17 @@ h2 {
 .error {
     background-color: #f2dede;
     color: #a94442;
+}
+
+.winner {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.controls-info {
+    margin-top: 10px;
+    color: #777;
+    font-size: 0.9rem;
 }
 
 .game-controls {
