@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add event listeners for ingredient buttons
   ingredientButtons.forEach(button => {
+    // Keep click support for mouse users
     button.addEventListener('click', () => {
       if (!gameActive) return;
 
@@ -46,6 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
         addIngredientToBurger(2, ingredient);
       }
     });
+
+    // Add touchstart support for touch devices
+    button.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent default behavior
+      if (!gameActive) return;
+
+      const ingredient = button.getAttribute('data-ingredient');
+      const player = button.getAttribute('data-player');
+
+      if (player === '1') {
+        addIngredientToBurger(1, ingredient);
+      } else {
+        addIngredientToBurger(2, ingredient);
+      }
+    }, { passive: false });
   });
 
   // Add keyboard event listener
