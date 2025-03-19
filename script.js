@@ -260,14 +260,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if the new order is the same as the previous one
     // and regenerate if it is (and if we had a previous order)
-    if (previousOrder.length > 0 && arraysEqual(currentOrder, previousOrder)) {
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    while (previousOrder.length > 0 && arraysEqual(currentOrder, previousOrder) && attempts < maxAttempts) {
       createOrder();
-      // If by rare chance we get the same order twice, just modify one ingredient
-      if (arraysEqual(currentOrder, previousOrder) && currentOrder.length > 3) {
+      attempts++;
+    }
+
+    // If we still have the same order after multiple attempts, force a difference
+    if (previousOrder.length > 0 && arraysEqual(currentOrder, previousOrder)) {
+      // Force a change by modifying at least one middle ingredient
+      if (currentOrder.length <= 3) {
+        // If burger only has 3 ingredients (2 bread + 1 middle), add one more ingredient
+        currentOrder.splice(currentOrder.length - 1, 0, previousOrder[1] === 'meat' ? 'lettuce' : 'meat');
+      } else {
         // Find a middle index (not first or last bread)
         const middleIndex = Math.floor(Math.random() * (currentOrder.length - 2)) + 1;
         // Toggle between meat and lettuce
         currentOrder[middleIndex] = currentOrder[middleIndex] === 'meat' ? 'lettuce' : 'meat';
+
+        // If the order is still the same (unlikely but possible), add or remove an ingredient
+        if (arraysEqual(currentOrder, previousOrder)) {
+          if (currentOrder.length < 5) {
+            // Add an ingredient if we have room
+            currentOrder.splice(currentOrder.length - 1, 0, 'meat');
+          } else {
+            // Remove a middle ingredient
+            currentOrder.splice(Math.floor(Math.random() * (currentOrder.length - 2)) + 1, 1);
+          }
+        }
       }
     }
 
