@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let countdownActive = false;
   // Add burger counters and win condition
   const BURGERS_TO_WIN = 3;
+  // Track previous order to prevent repeats
+  let previousOrder = [];
 
   // Initialize the game
   startNewGame();
@@ -163,6 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset the score circles
     resetScoreCircles();
 
+    // Remove any confetti
+    removeAllConfetti();
+
     // Hide orders until countdown starts
     order1Element.classList.remove('visible');
     order2Element.classList.remove('visible');
@@ -225,27 +230,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to generate a new random order
   function generateNewOrder() {
+    // Store the current order before overwriting it
+    previousOrder = [...currentOrder];
     currentOrder = [];
 
-    // We want total ingredients to be between 3 and 5
-    const orderLength = Math.floor(Math.random() * 3) + 3;
+    // Function to create a new order
+    const createOrder = () => {
+      currentOrder = [];
+      // We want total ingredients to be between 3 and 5
+      const orderLength = Math.floor(Math.random() * 3) + 3;
 
-    // Always start with bottom bread
-    currentOrder.push('bread');
+      // Always start with bottom bread
+      currentOrder.push('bread');
 
-    // Middle ingredients - exactly orderLength-2 ingredients
-    for (let i = 0; i < orderLength - 2; i++) {
-      // Only use meat and lettuce for middle ingredients
-      const middleIngredients = ['meat', 'lettuce'];
-      const randomIndex = Math.floor(Math.random() * middleIngredients.length);
-      currentOrder.push(middleIngredients[randomIndex]);
+      // Middle ingredients - exactly orderLength-2 ingredients
+      for (let i = 0; i < orderLength - 2; i++) {
+        // Only use meat and lettuce for middle ingredients
+        const middleIngredients = ['meat', 'lettuce'];
+        const randomIndex = Math.floor(Math.random() * middleIngredients.length);
+        currentOrder.push(middleIngredients[randomIndex]);
+      }
+
+      // Always end with top bread
+      currentOrder.push('bread');
+    };
+
+    // Create a new order
+    createOrder();
+
+    // Check if the new order is the same as the previous one
+    // and regenerate if it is (and if we had a previous order)
+    if (previousOrder.length > 0 && arraysEqual(currentOrder, previousOrder)) {
+      createOrder();
+      // If by rare chance we get the same order twice, just modify one ingredient
+      if (arraysEqual(currentOrder, previousOrder) && currentOrder.length > 3) {
+        // Find a middle index (not first or last bread)
+        const middleIndex = Math.floor(Math.random() * (currentOrder.length - 2)) + 1;
+        // Toggle between meat and lettuce
+        currentOrder[middleIndex] = currentOrder[middleIndex] === 'meat' ? 'lettuce' : 'meat';
+      }
     }
-
-    // Always end with top bread
-    currentOrder.push('bread');
 
     // Display the order for both players
     displayOrder();
+  }
+
+  // Utility function to compare arrays
+  function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
   }
 
   // Function to display the order
@@ -419,5 +455,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (feedbackOverlay) {
       stackElement.appendChild(feedbackOverlay);
     }
+  }
+
+  // Function to remove all confetti elements
+  function removeAllConfetti() {
+    const confettiElements = document.querySelectorAll('.confetti');
+    confettiElements.forEach(element => {
+      element.remove();
+    });
   }
 }); 
