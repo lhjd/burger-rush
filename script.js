@@ -231,8 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mark as failed and the other player wins
       gameActive = false;
 
-      // Apply visual feedback
-      playerArea.classList.add('error');
+      // Apply visual feedback - only highlight the winner
       opponentArea.classList.add('winner');
 
       if (player === 1) {
@@ -277,15 +276,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (player === 1) {
         player1Score++;
-        // Apply visual feedback
+        // Apply visual feedback - only highlight the winner
         player1Area.classList.add('success');
-        player2Area.classList.add('error');
         updateScoreCircles(1);
       } else {
         player2Score++;
-        // Apply visual feedback
+        // Apply visual feedback - only highlight the winner
         player2Area.classList.add('success');
-        player1Area.classList.add('error');
         updateScoreCircles(2);
       }
 
@@ -321,13 +318,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset visual feedback first
     resetVisualFeedback();
 
-    if (player === 1) {
-      player1Area.classList.add('winner');
-      player2Area.classList.add('error');
-    } else {
-      player2Area.classList.add('winner');
-      player1Area.classList.add('error');
-    }
+    const winnerArea = player === 1 ? player1Area : player2Area;
+
+    // Only highlight the winner
+    winnerArea.classList.add('winner');
+
+    // Create confetti for the game winner!
+    createConfetti(winnerArea);
+    setTimeout(() => createConfetti(winnerArea), 500);
+    setTimeout(() => createConfetti(winnerArea), 1000);
 
     // Add game over class to container for potential styling
     document.querySelector('.container').classList.add('game-over');
