@@ -1,0 +1,208 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #e65100;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #e65100;
+}
+
+.game-area {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-area, .burger-area, .ingredients {
+    margin-bottom: 30px;
+}
+
+.order {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 180px;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    justify-content: flex-start;
+}
+
+.burger-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 200px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    justify-content: flex-start;
+}
+
+.ingredient {
+    width: 180px;
+    text-align: center;
+    padding: 8px 0;
+    margin: 2px 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.bread {
+    background-color: #f5deb3;
+    height: 30px;
+    border-radius: 10px 10px 5px 5px;
+}
+
+.bread.bottom {
+    border-radius: 5px 5px 10px 10px;
+}
+
+.meat {
+    background-color: #8b4513;
+    height: 20px;
+}
+
+.lettuce {
+    background-color: #90ee90;
+    height: 10px;
+}
+
+.cheese {
+    background-color: #ffd700;
+    height: 10px;
+}
+
+.tomato {
+    background-color: #ff6347;
+    height: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ingredient-btn, #reset-btn, #new-order-btn {
+    padding: 10px 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    min-width: 100px;
+    font-weight: bold;
+}
+
+.bread-btn {
+    background-color: #f5deb3;
+    color: #333;
+}
+
+.bread-btn:hover {
+    background-color: #e6c99c;
+}
+
+.meat-btn {
+    background-color: #8b4513;
+}
+
+.meat-btn:hover {
+    background-color: #6d3710;
+}
+
+.lettuce-btn {
+    background-color: #90ee90;
+    color: #333;
+}
+
+.lettuce-btn:hover {
+    background-color: #7ad67a;
+}
+
+.cheese-btn {
+    background-color: #ffd700;
+    color: #333;
+}
+
+.cheese-btn:hover {
+    background-color: #e5c100;
+}
+
+.tomato-btn {
+    background-color: #ff6347;
+}
+
+.tomato-btn:hover {
+    background-color: #e55a40;
+}
+
+#reset-btn {
+    background-color: #f44336;
+}
+
+#reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+#new-order-btn {
+    background-color: #2196f3;
+}
+
+#new-order-btn:hover {
+    background-color: #1976d2;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.game-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+} 
