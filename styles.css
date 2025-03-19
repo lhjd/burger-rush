@@ -275,8 +275,7 @@ h2 {
 }
 
 .game-area.winner {
-    box-shadow: 0 0 0 3px #dff0d8;
-    background-color: rgba(223, 240, 216, 0.3);
+    /* Removed green background but keep the class for potential future use */
 }
 
 .controls-info {
